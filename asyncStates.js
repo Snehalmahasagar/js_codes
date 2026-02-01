@@ -19,6 +19,7 @@ async function fetchUsers(){
 
 }
 fetchUsers();
+
 const url = "https://jsonplaceholder.typicode.com/users";
 async function safeFetch(url){
     const res = await fetch(url)
@@ -29,4 +30,13 @@ async function safeFetch(url){
     
 }
 
-safeFetch();
+async function main() {
+    try{
+        const data = await safeFetch(url);
+        console.log(data);
+    }catch(error){
+        console.log("Error: ",error);
+    }
+}
+
+main();

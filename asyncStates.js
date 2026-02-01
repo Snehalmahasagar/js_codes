@@ -7,8 +7,7 @@ async function fetchUsers(){
             throw new Error("Api failed")
 
         }
-        const data = await res.json();
-        console.log(data);
+        return res.json();
 
     }catch(err){ //error state
         error = err.message;
@@ -20,3 +19,14 @@ async function fetchUsers(){
 
 }
 fetchUsers();
+const url = "https://jsonplaceholder.typicode.com/users";
+async function safeFetch(url){
+    const res = await fetch(url)
+    if(!res.ok){
+        throw new Error("Api failed")
+    }
+    return await res.json();
+    
+}
+
+safeFetch();

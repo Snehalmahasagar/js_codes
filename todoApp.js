@@ -9,6 +9,7 @@ addBtn.addEventListener("click" , function(){
         alert("please add the task")
         return;
     }
+    alert(`Your ${taskText} taks added to the list!`)
 
 //tasks lits
 const li = document.createElement("li")
@@ -21,6 +22,7 @@ const complete = document.createElement("button")
 complete.textContent = "👍"
 complete.addEventListener("click", function(){
     span.classList.toggle("completed")
+    alert(`Try to complete ${taskText} `)
 })
 
 //delete button
@@ -28,6 +30,7 @@ const delete_btn =  document.createElement("button")
 delete_btn.textContent = "❎"
 delete_btn.addEventListener("click", function(){
     li.remove();
+    alert(`successfully completed the ${taskText}`)
 })
 
 //appending

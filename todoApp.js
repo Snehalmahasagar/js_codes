@@ -1,77 +1,53 @@
-const addBtn = document.getElementById("btn_task")
-const taskInput = document.getElementById("taskInput")
-const list = document.getElementById("list")
+const addBtn = document.getElementById("btn_task");
+const taskInput = document.getElementById("taskInput");
+const list = document.getElementById("list");
 
-//adding tasks
-addBtn.addEventListener("click" , function(){
-    const taskText = taskInput.value;
-    if(taskText === ""){
-        alert("please add the task")
-        return;
-    }
+// Add tasks
+addBtn.addEventListener("click", function () {
+  const taskText = taskInput.value.trim();
+  if (taskText === "") {
+    alert("please add the task");
+    return;
+  }
 
-    alert(`Your ${taskText} taks added to the list!`)
-    
+ 
 
-//tasks lits
-const li = document.createElement("li")
-//task TexttaskText
-const span = document.createElement("span")
-span.textContent = taskText;
+  const li = document.createElement("li");
 
-//complete button
-const complete = document.createElement("button")
-complete.textContent = "👍"
+  const span = document.createElement("span");
+  span.textContent = taskText;
 
-//start time
-const startTimeStamp = document.createElement("small")
-const timeStamp = Date.now();
-const dateTime = new Date(timeStamp);
-const showTime = dateTime.toLocaleString();
+  //complete button
+  const completeBtn = document.createElement("button");
+  completeBtn.addEventListener("click", function(){
+    span.classList.toggle("completed");
+
+    //showing on ui -> created timing
+    const creatdAt = document.createElement("small");
+  const now = new Date();
+  creatdAt.textContent = now.toLocaleString();
+   li.appendChild(creatdAt);
+  })
+
+  //time taken 
+  const timeTakenBtn = document.createElement("button");
+  timeTakenBtn.addEventListener("click", function(){
+    const timeTaken = document.createElement("small");
+    const timeTake= new Date() - new Date(li.creatdAt);
+    timeTake.textContent= `Time took ${timeTake} ms`;
+    li.appendChild(timeTaken)
+  })
+ 
+  
+  
 
 
-complete.addEventListener("click", function(){
-    span.classList.toggle("completed")
-    
-        alert(`Your  ${taskText} completed at ${showTime}`)
-    
-    })
-
-
-//delete button
-const delete_btn =  document.createElement("button")
-delete_btn.textContent = "❎"
-const endTimestamp = document.createElement("small")
-const endtime = Date.now();
-const enddate = new Date(endtime)
-const endShowTime = enddate.toLocaleString();
-delete_btn.addEventListener("click", function(){
-    alert(`your task deleted at ${endShowTime}`)
-    li.remove();
-})
-
-//time taken
-const timeTaken = document.createElement("button")
-timeTaken.textContent = "⏱️"
-timeTaken.addEventListener("click", function(){
-    const totalTime = endShowTime - showTime;
-    alert(`time taken for the taks is ${totalTime}`)
-})
+  li.appendChild(span);
+  li.appendChild(completeBtn);
+  li.appendChild(timeTakenBtn);
 
 
 
-//appending
-li.appendChild(span);
-li.appendChild(complete);
-li.appendChild(delete_btn);
-li.append(startTimeStamp);
-li.append(endTimestamp);
-li.append(timeTaken)
-
-list.appendChild(li);
-
-//clearing input
-taskInput.value= "";
-})
-
-
+  list.appendChild(li);
+  taskInput.value = "";
+});
